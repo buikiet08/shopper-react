@@ -9,7 +9,7 @@ import { useQuery } from '@/hooks/useQuery'
 import { productService } from '@/services/product'
 import { cn, sluify } from '@/utils'
 import queryString from 'query-string'
-import React from 'react'
+import React, { useState } from 'react'
 import { generatePath, Link, useParams, useSearchParams } from 'react-router-dom'
 
 import { Pagination} from 'swiper';
@@ -24,6 +24,10 @@ function ProductPage() {
     const currentPage = useCurrentPage()
     const [search,setSearch] = useSearchParams()
     const searchProduct = search.get('search')
+
+    const [minPrice,setMinPrice] = useState(search.minPrice)
+    const [maxPrice,setMaxPrice] = useState(search.maxPrice)
+
     // lọc sp
     const sort = search.get('sort') || 'newest'
 
@@ -32,7 +36,9 @@ function ProductPage() {
         fields : `name,real_price,price,categories,slug,id,images,discount_rate,review_count,rating_average`,
         categories: id,
         name : searchProduct,
-        sort
+        sort,
+        minPrice:search.minPrice,
+        maxPrice:search.maxPrice,
     })
     const {data,loading} = useQuery({
         queryKey : [qs],
@@ -92,12 +98,10 @@ function ProductPage() {
                                         </div>
                                     </div>
                                 </li>
-                                <li className="nav-item">
-                                    {/* Toggle */}
+                                {/* <li className="nav-item">
                                     <a className="nav-link font-size-lg text-reset border-bottom mb-6" href="#seasonCollapse">
                                         Rating
                                     </a>
-                                    {/* Collapse */}
                                     <div>
                                         <div className="form-group form-group-overflow mb-6" id="seasonGroup">
                                             <div className="custom-control custom-radio mb-3">
@@ -137,24 +141,18 @@ function ProductPage() {
                                     </div>
                                 </li>
                                 <li className="nav-item">
-                                    {/* Toggle */}
                                     <a className="nav-link font-size-lg text-reset border-bottom mb-6" data-toggle="collapse" href="#priceCollapse">
                                         Price
                                     </a>
-                                    {/* Collapse */}
                                     <div>
-                                        {/* Range */}
                                         <div className="d-flex align-items-center">
-                                            {/* Input */}
-                                            <input type="number" className="form-control form-control-xs" placeholder="$10.00" min={10} />
-                                            {/* Divider */}
+                                            <input type="number" value={minPrice} onChange={ev => setMinPrice(ev.target.value)} className="form-control form-control-xs" placeholder="$10.00"  />
                                             <div className="text-gray-350 mx-2">‒</div>
-                                            {/* Input */}
-                                            <input type="number" className="form-control form-control-xs" placeholder="$350.00" max={350} />
+                                            <input type="number" value={maxPrice} onChange={ev => setMaxPrice(ev.target.value)} className="form-control form-control-xs" placeholder="$350.00"  />
                                         </div>
                                         <button className="btn btn-outline-dark btn-block mt-5">Apply</button>
                                     </div>
-                                </li>
+                                </li> */}
                             </ul>
                         </form>
                     </div>
@@ -232,7 +230,7 @@ function ProductPage() {
                                 {/* Breadcrumb */}
                                 <Breadcrumb>
                                     <Breadcrumb.Title to={PATH.Home}>Home</Breadcrumb.Title>
-                                    <Breadcrumb.Title>{category ? category?.title : 'Tất cả sản phẩm'}</Breadcrumb.Title>
+                                    <Breadcrumb.Title to=''>{category ? category?.title : 'Tất cả sản phẩm'}</Breadcrumb.Title>
                                 </Breadcrumb>
                                 {/* <ol className="breadcrumb mb-md-0 font-size-xs text-gray-400">
                                     <li className="breadcrumb-item">

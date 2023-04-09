@@ -1,4 +1,6 @@
+import { PATH } from '@/config/path'
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 function ShippingAndReturn() {
     return (
@@ -166,14 +168,14 @@ function ShippingAndReturn() {
                         {/* Buttons */}
                         <div className="row mt-9">
                             <div className="col-12 col-md-6">
-                                <a className="btn btn-lg btn-block btn-outline-dark" href="faq.html">
+                                <Link className="btn btn-lg btn-block btn-outline-dark" to={PATH.Faq}>
                                     Have more Questions?
-                                </a>
+                                </Link>
                             </div>
                             <div className="col-12 col-md-6">
-                                <a className="btn btn-lg btn-block btn-outline-dark" href="contact-us.html">
+                                <Link className="btn btn-lg btn-block btn-outline-dark" to={PATH.Contact}>
                                     Want to Contact Us?
-                                </a>
+                                </Link>
                             </div>
                         </div>
                     </div>

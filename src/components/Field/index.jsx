@@ -10,7 +10,7 @@ function Field({label,error,renderField,onChange,...props}) {
     }
     return (
         <FieldStyle className={cn('form-group relative', {error})}>
-            {label && <label className="sr-only" htmlFor={id}>
+            {label && <label className="" htmlFor={id}>
                 {label}
             </label>}
             {

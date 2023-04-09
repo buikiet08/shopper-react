@@ -131,10 +131,10 @@ function Account() {
                                                 {/* Remember */}
                                                 <div className="form-group">
                                                     <div className="custom-control custom-checkbox">
-                                                        <input className="custom-control-input" id="loginRemember" type="checkbox" />
+                                                        {/* <input className="custom-control-input" id="loginRemember" type="checkbox" />
                                                         <label className="custom-control-label" htmlFor="loginRemember">
                                                             Remember me
-                                                        </label>
+                                                        </label> */}
                                                     </div>
                                                 </div>
                                             </div>
