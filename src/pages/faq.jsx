@@ -1,9 +1,13 @@
 import { Accordition } from '@/components/Accordion'
 import React from 'react'
+import {Helmet} from 'react-helmet'
 
 function Faq() {
     return (
         <section className="pt-7 pb-12">
+            <Helmet>
+                <title>Shopper - Q&A</title>
+            </Helmet>
             <div className="container">
                 <div className="row justify-content-center">
                     <div className="col-12 col-lg-10 col-xl-8">

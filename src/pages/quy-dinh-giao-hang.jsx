@@ -1,10 +1,14 @@
 import { PATH } from '@/config/path'
 import React from 'react'
 import { Link } from 'react-router-dom'
+import {Helmet} from 'react-helmet'
 
 function ShippingAndReturn() {
     return (
         <section className="pt-7 pb-12">
+            <Helmet>
+                <title>Quy địng giao hàng</title>
+            </Helmet>
             <div className="container">
                 <div className="row justify-content-center">
                     <div className="col-12 col-lg-10 font-size-lg text-gray-500">
