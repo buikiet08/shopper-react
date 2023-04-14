@@ -11,6 +11,7 @@ import { message, Spin } from 'antd'
 import React, { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
+import {Helmet} from 'react-helmet'
 
 function ViewCart() {
     const {cart,prevCheckoutResponse,preCheckoutLoading,promotionLoading} = useCart()
@@ -44,6 +45,9 @@ function ViewCart() {
     const { promotion } = prevCheckoutResponse
     return (
         <>
+            <Helmet>
+                <title>Giỏ hàng</title>
+            </Helmet>
             <div>
                 <section className="pt-7 pb-12">
                     {

@@ -5,6 +5,7 @@ import { message } from 'antd';
 import React from 'react'
 import { useDispatch } from 'react-redux';
 import { Link, NavLink, Outlet } from 'react-router-dom'
+import { Helmet } from 'react-helmet'
 
 function ProfileLayout() {
     const dispatch = useDispatch()
@@ -17,8 +18,11 @@ function ProfileLayout() {
             handleError(error)
         }
     }
-  return (
-    <section className="pt-7 pb-12">
+    return (
+        <section className="pt-7 pb-12">
+            <Helmet>
+                <title>Thông tin tài khoản</title>
+            </Helmet>
             <div className="container">
                 <div className="row">
                     <div className="col-12 text-center">
@@ -46,7 +50,7 @@ function ProfileLayout() {
                 </div>
             </div>
         </section>
-  )
+    )
 }
 
 export default ProfileLayout

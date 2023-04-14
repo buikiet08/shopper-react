@@ -5,6 +5,7 @@ import { clearToken, clearUser, getToken, getUser, setToken, setUser } from "@/u
 import { createAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 import { call, put, takeLatest } from "redux-saga/effects"
 import { cartActions, getCartAction } from "./cart"
+import { message } from "antd"
 
 
 
@@ -128,6 +129,7 @@ function * fethLogin (action) {
         // yield put(getCartAction())
         yield put(authActions.setUser(user.data))
         yield put(loginSuccessAction())
+        message.success('Login success')
         // thunkApi.fulfillWithValue(user.data)
         // dispatch({ type: SET_USER_ACTION, payload: user.data })
         // return user.data

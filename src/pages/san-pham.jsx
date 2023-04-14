@@ -11,6 +11,7 @@ import { cn, sluify } from '@/utils'
 import queryString from 'query-string'
 import React, { useState } from 'react'
 import { generatePath, Link, useParams, useSearchParams } from 'react-router-dom'
+import {Helmet} from 'react-helmet'
 
 import { Pagination} from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -54,6 +55,9 @@ function ProductPage() {
     const category = useCategory(parseInt(id))
     return (
         <section className="py-11">
+            <Helmet>
+                <title>Sản phẩm</title>
+            </Helmet>
             <div className="container">
                 <div className="row">
                     <div className="col-12 col-md-4 col-lg-3">

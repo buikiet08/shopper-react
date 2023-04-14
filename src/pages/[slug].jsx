@@ -16,6 +16,7 @@ import { Image, message } from 'antd'
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { useNavigate, useParams } from 'react-router-dom'
+import {Helmet} from 'react-helmet'
 
 function ProductPageDetail() {
     const {slug} = useParams()
@@ -70,6 +71,9 @@ function ProductPageDetail() {
     if(loading) return null
     return (
         <>
+            <Helmet>
+                <title>{product?.name}</title>
+            </Helmet>
             <div>
                 {/* BREADCRUMB */}
                 <nav className="py-5">
@@ -80,7 +84,7 @@ function ProductPageDetail() {
                                 <Breadcrumb>
                                     <Breadcrumb.Title to={PATH.Home}>Home</Breadcrumb.Title>
                                     <Breadcrumb.Title to={PATH.Product}>Sản phẩm</Breadcrumb.Title>
-                                    <Breadcrumb.Title>{detail?.data?.name}</Breadcrumb.Title>
+                                    <Breadcrumb.Title to=''>{detail?.data?.name}</Breadcrumb.Title>
                                 </Breadcrumb>
                             </div>
                         </div>

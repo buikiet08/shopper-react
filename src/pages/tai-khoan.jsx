@@ -81,7 +81,7 @@ function Account() {
             try {
                 dispatch(loginThunkAction(formLogin.values));
                 // await dispatch(loginThunkAction(formLogin.values)).unwrap();
-                message.success('Login success')
+                
                 // navigate(PATH.Profile.index)
             } catch (error) {
                 handleError(error)
@@ -106,6 +106,9 @@ function Account() {
     }
     return (
         <>
+            <Helmet>
+                <title>Đăng nhập & đăng ký tài khoản</title>
+            </Helmet>
             <FogotPasswordModal open={openFogotPassword} onClose={() => setOpenFogotPassword(false)} />
             <section className="py-12">
                 <div className="container">
@@ -125,7 +128,7 @@ function Account() {
                                             </div>
                                             <div className="col-12">
                                                 {/* Password */}
-                                                <Field {...formLogin.register('password')} placeholder="Password *" />
+                                                <Field {...formLogin.register('password')} type='password' placeholder="Password *" />
                                             </div>
                                             <div className="col-12 col-md">
                                                 {/* Remember */}
@@ -186,11 +189,11 @@ function Account() {
                                             </div>
                                             <div className="col-12 col-md-6">
                                                 {/* Password */}
-                                                <Field {...formRegister.register('password')} placeholder="Password *" />
+                                                <Field {...formRegister.register('password')} type='password' placeholder="Password *" />
                                             </div>
                                             <div className="col-12 col-md-6">
                                                 {/* Password */}
-                                                <Field {...formRegister.register('confirmPassword')} placeholder="Confirm Password *" />
+                                                <Field {...formRegister.register('confirmPassword')} type='password' placeholder="Confirm Password *" />
                                             </div>
                                             <div className="col-12 col-md-auto">
                                                 {/* Link */}

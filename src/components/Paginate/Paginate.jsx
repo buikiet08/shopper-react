@@ -31,7 +31,7 @@ function Paginate({totalPage, name = 'page'}) {
             let path = `${pathname}?${_search.toString()}`
             list.push(
             (
-                <li className={`page-item ${currentPage === i ? 'active' : ''}`}>
+                <li key={i} className={`page-item ${currentPage === i ? 'active' : ''}`}>
                     <Link className="page-link" to={path}>{i}</Link>
                 </li>
             )

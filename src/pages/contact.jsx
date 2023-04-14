@@ -6,6 +6,7 @@ import { organizationService } from '@/services/organization'
 import { handleError, regexp, required } from '@/utils'
 import { message } from 'antd'
 import React from 'react'
+import {Helmet} from 'react-helmet'
 
 function Contact() {
     const {loading, refetch:contactService} = useQuery({
@@ -31,6 +32,9 @@ function Contact() {
     }
     return (
         <section className="pt-7 pb-12">
+            <Helmet>
+                <title>Liên hệ</title>
+            </Helmet>
             <div className="container">
                 <div className="row">
                     <div className="col-12">

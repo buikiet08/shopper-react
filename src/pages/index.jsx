@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Pagination } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
+import {Helmet} from 'react-helmet'
 
 // Import Swiper styles
 import 'swiper/css';
@@ -12,9 +13,12 @@ import { Link } from 'react-router-dom';
 import { PATH } from '@/config/path';
 
 export const Home = () => {
-  const {t} = useTranslate()
+  const { t } = useTranslate()
   return (
     <>
+      <Helmet>
+        <title>Shopper.</title>
+      </Helmet>
       <div>
         {/* PROMO */}
         <div className="py-3 bg-dark bg-pattern mb-4">
@@ -291,7 +295,7 @@ export const Home = () => {
                   <ListProduct link='/san-pham?sort=discount_price.desc' query='?sort=discount_price.desc&limit=8' />
                 </Tab.Content>
               </div>
-              
+
             </div>
           </section>
         </Tab>

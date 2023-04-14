@@ -10,10 +10,10 @@ export const Breadcrumb = ({children}) => {
 }
 
 Breadcrumb.Title = ({ to, children }) => {
-    const Comp = to ? Link : React.Fragment
+    // const Comp = to ? Link : React.Fragment
     return (
-        <li className="breadcrumb-item text-gray-400">
-            <Comp to={to}>{children}</Comp>
+        <li className="breadcrumb-item !text-gray-400">
+            <Link to={to}>{children}</Link>
         </li>
     )
 }

@@ -15,6 +15,7 @@ import { Radio, Spin } from 'antd'
 import React, { useEffect, useRef, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
+import {Helmet} from 'react-helmet'
 
 
 const rules = {
@@ -99,6 +100,9 @@ function Checkout() {
     const { promotion } = prevCheckoutResponse
     return (
         <>
+            <Helmet>
+                <title>Thanh toán</title>
+            </Helmet>
             <AddressDrawer onSelect={e => {
                 storeAddressSelect.set(e)
                 setAddress(e)
