@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Pagination } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import {Helmet} from 'react-helmet'
+import { Helmet } from 'react-helmet'
 
 // Import Swiper styles
 import 'swiper/css';
@@ -37,59 +37,128 @@ export const Home = () => {
         </div>
         {/* CATEGORIES */}
         <section>
-          <div className="row no-gutters d-block d-lg-flex flickity flickity-lg-none" data-flickity="{&quot;watchCSS&quot;: true}">
-            {/* Item */}
+          <Swiper
+            spaceBetween={0}
+            slidesPerView={3}
+            autoplay={true}
+            breakpoints={{
+              // when window width is >= 640px
+              300: {
+                slidesPerView: 1,
+              },
+              640: {
+                slidesPerView: 1,
+              },
+              // when window width is >= 768px
+              768: {
+                slidesPerView: 2,
+              },
+              1024: {
+                slidesPerView: 3,
+              },
+            }}
+            onSlideChange={() => console.log('slide change')}
+          // onSwiper={(swiper) => console.log(swiper)}
+          >
+            <SwiperSlide>
+              <div className="bg-cover" style={{ backgroundImage: 'url(/img/covers/cover-1.jpg)' }}>
+                <div className="card bg-dark-5 bg-hover text-white text-center" style={{ minHeight: 470 }}>
+                  <div className="card-body mt-auto mb-n11 py-8">
+                    {/* Heading */}
+                    <h1 className="mb-0 font-weight-bolder">
+                      {t('Motorbike')}
+                    </h1>
+                  </div>
+                  <div className="card-body mt-auto py-8">
+                    {/* Button */}
+                    <Link className="btn btn-white stretched-link" to='/xe-may-o-to-xe-dap/8594'>
+                      {t('Shop Now')} <i className="fe fe-arrow-right ml-2" />
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            </SwiperSlide>
+            <SwiperSlide>
+              <div className="bg-cover" style={{ backgroundImage: 'url(/img/covers/cover-2.avif)' }}>
+                <div className="card bg-dark-5 bg-hover text-white text-center" style={{ minHeight: 470 }}>
+                  <div className="card-body mt-auto mb-n11 py-8">
+                    {/* Heading */}
+                    <h1 className="mb-0 font-weight-bolder">
+                      {t('Camera')}
+                    </h1>
+                  </div>
+                  <div className="card-body mt-auto py-8">
+                    {/* Button */}
+                    <Link className="btn btn-white stretched-link" to='/may-anh-quay-phim/1801'>
+                      {t('Shop Now')} <i className="fe fe-arrow-right ml-2" />
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            </SwiperSlide>
+            <SwiperSlide>
+              <div className="bg-cover" style={{ backgroundImage: 'url(/img/covers/cover-3.avif)' }}>
+                <div className="card bg-dark-5 bg-hover text-white text-center" style={{ minHeight: 470 }}>
+                  <div className="card-body mt-auto mb-n11 py-8">
+                    {/* Heading */}
+                    <h1 className="mb-0 font-weight-bolder">
+                      {t('Sport Equipment')}
+                    </h1>
+                  </div>
+                  <div className="card-body mt-auto py-8">
+                    {/* Button */}
+                    <Link className="btn btn-white stretched-link" to='/the-thao-da-ngoai/1975'>
+                      {t('Shop Now')} <i className="fe fe-arrow-right ml-2" />
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            </SwiperSlide>
+          </Swiper>
+          {/* <div className="row no-gutters d-block d-lg-flex flickity flickity-lg-none" data-flickity="{&quot;watchCSS&quot;: true}">
             <div className="col-12 col-md-6 col-lg-4 d-flex flex-column bg-cover" style={{ backgroundImage: 'url(/img/covers/cover-1.jpg)' }}>
               <div className="card bg-dark-5 bg-hover text-white text-center" style={{ minHeight: 470 }}>
                 <div className="card-body mt-auto mb-n11 py-8">
-                  {/* Heading */}
                   <h1 className="mb-0 font-weight-bolder">
                     {t('Motorbike')}
                   </h1>
                 </div>
                 <div className="card-body mt-auto py-8">
-                  {/* Button */}
                   <Link className="btn btn-white stretched-link" to='/xe-may-o-to-xe-dap/8594'>
                     {t('Shop Now')} <i className="fe fe-arrow-right ml-2" />
                   </Link>
                 </div>
               </div>
             </div>
-            {/* Card */}
             <div className="col-12 col-md-6 col-lg-4 d-flex flex-column bg-cover" style={{ backgroundImage: 'url(/img/covers/cover-2.avif)' }}>
               <div className="card bg-dark-5 bg-hover text-white text-center" style={{ minHeight: 470 }}>
                 <div className="card-body mt-auto mb-n11 py-8">
-                  {/* Heading */}
                   <h1 className="mb-0 font-weight-bolder">
                     {t('Camera')}
                   </h1>
                 </div>
                 <div className="card-body mt-auto py-8">
-                  {/* Button */}
                   <Link className="btn btn-white stretched-link" to='/may-anh-quay-phim/1801'>
                     {t('Shop Now')} <i className="fe fe-arrow-right ml-2" />
                   </Link>
                 </div>
               </div>
             </div>
-            {/* Card */}
             <div className="col-12 col-md-6 col-lg-4 d-flex flex-column bg-cover" style={{ backgroundImage: 'url(/img/covers/cover-3.avif)' }}>
               <div className="card bg-dark-5 bg-hover text-white text-center" style={{ minHeight: 470 }}>
                 <div className="card-body mt-auto mb-n11 py-8">
-                  {/* Heading */}
                   <h1 className="mb-0 font-weight-bolder">
                     {t('Sport Equipment')}
                   </h1>
                 </div>
                 <div className="card-body mt-auto py-8">
-                  {/* Button */}
                   <Link className="btn btn-white stretched-link" to='/the-thao-da-ngoai/1975'>
                     {t('Shop Now')} <i className="fe fe-arrow-right ml-2" />
                   </Link>
                 </div>
               </div>
             </div>
-          </div>
+          </div> */}
         </section>
         {/* FEATURES */}
         <section className="pt-7">
@@ -364,6 +433,22 @@ export const Home = () => {
               modules={[Pagination]}
               pagination={{ clickable: true }}
               autoplay={true}
+              breakpoints={{
+                // when window width is >= 640px
+                300: {
+                  slidesPerView: 1,
+                },
+                640: {
+                  slidesPerView: 1,
+                },
+                // when window width is >= 768px
+                768: {
+                  slidesPerView: 2,
+                },
+                1024: {
+                  slidesPerView: 3,
+                },
+              }}
               onSlideChange={() => console.log('slide change')}
             // onSwiper={(swiper) => console.log(swiper)}
             >

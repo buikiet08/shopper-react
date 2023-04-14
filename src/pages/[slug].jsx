@@ -16,59 +16,112 @@ import { Image, message } from 'antd'
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { useNavigate, useParams } from 'react-router-dom'
-import {Helmet} from 'react-helmet'
+import { Helmet } from 'react-helmet'
+import { Skeleton } from '@/components/Skeleton'
+import { useScrollTop } from '@/hooks/useScrollTop'
 
 function ProductPageDetail() {
-    const {slug} = useParams()
-    const [,id] = slug.split('-p')
-
-    const { cart, loading:loadingProduct } = useCart()
+    const { slug } = useParams()
+    const [, id] = slug.split('-p')
+    useScrollTop()
+    const { cart, loading: loadingProduct } = useCart()
     const _cartLoading = loadingProduct[id]
 
-    const {user} = useAuth()
+    const { user } = useAuth()
     const dispatch = useDispatch()
     const navigate = useNavigate()
-    const [openImageModal,setOpenImageModal] = useState(false)
-    const [currentImage,setCurrentImage] = useState(0)
-    const {data:detail,loading} = useQuery({
+    const [openImageModal, setOpenImageModal] = useState(false)
+    const [currentImage, setCurrentImage] = useState(0)
+    const { data: detail, loading } = useQuery({
         queryFn: () => productService.getProductDetail(id),
         enabled: !!id,
-        onError:() => {
+        onError: () => {
             message.error('Sản phẩm không tồn tại')
             navigate(PATH.Product)
         }
     })
-    const { data: product} = detail || {}
+    const { data: product } = detail || {}
     const category = useCategory(detail?.data?.categories)
     const onAddWishList = useAction({
         service: () => productService.addWishList(id),
         loadingMessage: `Đang thêm sản phẩm "${product?.name}" vào yêu thích`,
-        successMessage:`Đã thêm sản phẩm "${product?.name}" vào yêu thích`
+        successMessage: `Đã thêm sản phẩm "${product?.name}" vào yêu thích`
     })
 
     const onActiveImageModal = (i) => {
         setCurrentImage(i)
         setOpenImageModal(true)
     }
-    
+
     const onAddItem = () => {
-        if(user) {
-            const {listItems} = cart
+        if (user) {
+            const { listItems } = cart
             // kiểm tra nêu sp đã dc thêm vào giỏ thì update + 1 , ngược lại = 1
             const cartItem = listItems.find(e => e.productId === product.id)
             dispatch(addCartItemAction({
-                productId:id,
-                quantity:cartItem ? cartItem.quantity + 1 : 1,
-                showPopover:true
+                productId: id,
+                quantity: cartItem ? cartItem.quantity + 1 : 1,
+                showPopover: true
             }))
         } else {
             navigate(PATH.Account)
         }
-        
-    }
-    console.log(product)
 
-    if(loading) return null
+    }
+    if (loading) {
+        return (
+            <section>
+                <div className="container">
+                    <div className="row">
+                        <div className="col-12">
+                            <div className="row">
+                                <div className="col-12 col-md-6">
+                                    <div className="card">
+                                        <div className="mb-4">
+                                            <Skeleton height={753.20} />
+                                        </div>
+
+                                    </div>
+                                    <div className="flickity-nav mx-n2 mb-10 mb-md-0 flex">
+                                        <div className="col-12 px-2" style={{ maxWidth: 113 }}><Skeleton height={97} /></div>
+                                        <div className="col-12 px-2" style={{ maxWidth: 113 }}><Skeleton height={97} /></div>
+                                        <div className="col-12 px-2" style={{ maxWidth: 113 }}><Skeleton height={97} /></div>
+                                    </div>
+                                </div>
+                                <div className="col-12 col-md-6 pl-lg-10">
+                                    <div className="row mb-1">
+                                        <div className="col">
+                                            <Skeleton height={20} width={200} />
+                                        </div>
+                                        <div className="col-auto flex items-center">
+                                            <Skeleton height={20} width={160} />
+                                        </div>
+                                    </div>
+                                    <h3 className="mb-2"><Skeleton height={40} /></h3>
+                                    <div className="mb-7">
+                                        <Skeleton height={20} width={200} />
+                                    </div>
+                                    <Skeleton height={100} />
+                                    <br />
+
+                                    <div className="form-group">
+                                        <div className="form-row mb-7">
+                                            <div className="col-12 col-lg">
+                                                <Skeleton height={60} width={260} />
+                                            </div>
+                                            <div className="col-12 col-lg-auto">
+                                                <Skeleton height={60} width={180} />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        )
+    }
     return (
         <>
             <Helmet>
@@ -107,8 +160,8 @@ function ProductPageDetail() {
                                             <div className="mb-4">
                                                 <img onClick={() => setOpenImageModal(true)} src={product?.images[0].thumbnail_url} alt="..." className="card-img-top cursor-pointer" />
                                             </div>
-                                            <div style={{display: "none"}}>
-                                                <Image.PreviewGroup preview={{current:currentImage, visible: openImageModal, onVisibleChange: vis => setOpenImageModal(vis)}}>
+                                            <div style={{ display: "none" }}>
+                                                <Image.PreviewGroup preview={{ current: currentImage, visible: openImageModal, onVisibleChange: vis => setOpenImageModal(vis) }}>
                                                     {product?.images?.map(e => <Image key={e.thumbnail_url} src={e.thumbnail_url} />)}
                                                 </Image.PreviewGroup>
                                             </div>
@@ -116,7 +169,7 @@ function ProductPageDetail() {
                                         {/* Slider */}
                                         <div className="flickity-nav mx-n2 mb-10 mb-md-0 flex">
                                             {
-                                                product?.images.slice(0, 4).map((e,i) => (
+                                                product?.images.slice(0, 4).map((e, i) => (
                                                     <div key={e.thumbnail_url} onClick={() => onActiveImageModal(i)} className="col-12 px-2" style={{ maxWidth: 113 }}>
                                                         <div className="embed-responsive embed-responsive-1by1 bg-cover" style={{ backgroundImage: `url(${e.thumbnail_url})` }} />
                                                     </div>
@@ -136,7 +189,7 @@ function ProductPageDetail() {
                                                     </div>
                                                 </div>
                                             }
-                                            
+
                                         </div>
                                     </div>
                                     <div className="col-12 col-md-6 pl-lg-10">
@@ -159,11 +212,11 @@ function ProductPageDetail() {
                                         {/* Price */}
                                         <div className="mb-7">
                                             {
-                                                product?.real_price < product?.price ? 
-                                                <>
-                                                    <span className="font-size-lg font-weight-bold text-gray-350 text-decoration-line-through">{currency(product?.real_price)}</span>
-                                                    <span className="ml-1 font-size-h5 font-weight-bolder text-primary">{currency(product?.price)}</span>
-                                                </> :
+                                                product?.real_price < product?.price ?
+                                                    <>
+                                                        <span className="font-size-lg font-weight-bold text-gray-350 text-decoration-line-through">{currency(product?.real_price)}</span>
+                                                        <span className="ml-1 font-size-h5 font-weight-bolder text-primary">{currency(product?.price)}</span>
+                                                    </> :
                                                     <span className="ml-1 font-size-h5 font-weight-bolder text-primary">{currency(product?.real_price)}</span>
                                             }
                                             <span className="font-size-sm ml-1">(In Stock)</span>
@@ -232,7 +285,7 @@ function ProductPageDetail() {
                                     {/* Content */}
                                     <div className="tab-content">
                                         <Tab.Content value='description'>
-                                            <ShortMore className="py-10" dangerouslySetInnerHTML={{__html:product?.description}} />
+                                            <ShortMore className="py-10" dangerouslySetInnerHTML={{ __html: product?.description }} />
                                         </Tab.Content>
                                         <Tab.Content value='size'>
                                             <div className="row justify-content-center py-9">

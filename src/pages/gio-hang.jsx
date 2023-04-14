@@ -137,9 +137,9 @@ function ViewCart() {
                                     {/* Button */}
                                     <Link to={PATH.Checkout} className={cn(`btn btn-block btn-dark mb-2`, {disabled: !prevCheckoutResponse?.listItems?.length > 0 && cart?.listItems?.length > 0})}>Proceed to Checkout</Link>
                                     {/* Link */}
-                                    <a className="btn btn-link btn-sm px-0 text-body" href="shop.html">
+                                    <Link className="btn btn-link btn-sm px-0 text-body" to={PATH.Product}>
                                         <i className="fe fe-arrow-left mr-2" /> Continue Shopping
-                                    </a>
+                                    </Link>
                                 </div>
                             </div>
                         </div> :

@@ -103,7 +103,7 @@ export const SearchDrawer = ({ open, onClose }) => {
                                 </p>
                             </div>
                         ) :
-                        data?.data?.map(e => <SearchItem key={e.id} {...e} />)
+                        data?.data?.map(e => <SearchItem key={e._id} {...e} />)
                     }
                     {/* Button */}
                     {data?.data?.length > 0 && (
@@ -132,11 +132,11 @@ const SearchItem = ({name,price,real_price,thumbnail_url}) => {
                     <a className="stretched-link text-body line-clamp-2" href="./product.html">{name}</a> <br />
                 </p><div className="card-product-price">
                     {
-                        real_price < price ? 
+                        real_price ? real_price < price ? 
                         <>
                             <span className="sale text-primary">{currency(real_price)}</span>
                             <span className="text-muted line-through ml-1 inline-block">{currency(price)}</span>
-                        </> : <span className="text-muted inline-block">{currency(real_price)}</span>
+                        </> : <span className="text-muted inline-block">{currency(real_price)}</span> : <span className="text-muted inline-block">{currency(price)}</span>
                     }
                 </div>
                 <p />
@@ -158,7 +158,7 @@ const SearchItemLoading = () => {
                     <a className="stretched-link text-body" href="#"><Skeleton height={20} /></a><br/>
                 </p>
                 <div className="card-product-price">
-                    <Skeleton height={43} width={150} />
+                    <Skeleton height={40} width={150} />
                 </div>
             </div>
         </div>
